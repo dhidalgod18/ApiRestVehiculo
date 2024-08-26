@@ -1,6 +1,5 @@
 package com.gcatechnologies.alquilervehiculos.service;
 
-import com.gcatechnologies.alquilervehiculos.entities.MedioPago;
 import com.gcatechnologies.alquilervehiculos.entities.Vehiculo;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,5 @@
 package com.gcatechnologies.alquilervehiculos.service.impl;
 
-import com.gcatechnologies.alquilervehiculos.entities.MedioPago;
 import com.gcatechnologies.alquilervehiculos.entities.Vehiculo;
 import com.gcatechnologies.alquilervehiculos.repository.VehiculoRepository;
 import com.gcatechnologies.alquilervehiculos.service.VehiculoService;

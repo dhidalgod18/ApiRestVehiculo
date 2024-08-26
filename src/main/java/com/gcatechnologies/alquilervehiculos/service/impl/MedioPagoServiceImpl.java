@@ -5,7 +5,6 @@ import com.gcatechnologies.alquilervehiculos.repository.MedioPagoRepository;
 import com.gcatechnologies.alquilervehiculos.repository.UsuarioRepository;
 import com.gcatechnologies.alquilervehiculos.service.MedioPagoService;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

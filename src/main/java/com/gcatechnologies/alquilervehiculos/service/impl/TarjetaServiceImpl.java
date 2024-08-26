@@ -2,8 +2,6 @@ package com.gcatechnologies.alquilervehiculos.service.impl;
 
 import com.gcatechnologies.alquilervehiculos.entities.Tarjeta;
 import com.gcatechnologies.alquilervehiculos.entities.TarjetaDTO;
-import com.gcatechnologies.alquilervehiculos.entities.Usuario;
-import com.gcatechnologies.alquilervehiculos.entities.Vehiculo;
 import com.gcatechnologies.alquilervehiculos.repository.TarjetaRepository;
 import com.gcatechnologies.alquilervehiculos.service.TarjetaService;
 import jakarta.persistence.EntityNotFoundException;
