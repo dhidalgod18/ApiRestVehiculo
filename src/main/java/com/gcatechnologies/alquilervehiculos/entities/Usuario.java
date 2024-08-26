@@ -25,8 +25,20 @@ public class Usuario {
     private String contrasena;
 
     private String rol;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+    fetch = FetchType.EAGER)
+    @JoinTable( name = "usuario_medio_pagos",
+            joinColumns = @JoinColumn(
+                    name = "usuario_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "Medio_pago_id",
+                    referencedColumnName = "idMedioPago"
+            )
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+
+    )
     private List<MedioPago> medioPagos;
 
 

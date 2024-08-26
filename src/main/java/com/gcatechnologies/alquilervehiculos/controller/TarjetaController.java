@@ -33,7 +33,7 @@ public class TarjetaController {
     }
     @PostMapping("/nueva")
     public ResponseEntity<MensajeDTO> agregarTarjeta(@RequestBody Tarjeta tarjeta) {
-        if (tarjeta.getNumeroTarjeta().isEmpty() || tarjeta.getCodigo().isEmpty() ||
+        if (tarjeta.getNumeroTarjeta() == null || tarjeta.getCodigo() == null ||
                 tarjeta.getFechaExpiracion() == null || tarjeta.getUsuario().getId() == null ||
                 tarjeta.getMedioPago().getIdMedioPago() == null) {
             MensajeDTO errorResponse = new MensajeDTO(
@@ -72,10 +72,26 @@ public class TarjetaController {
         List<Tarjeta> obtener = tarjetaService.obtenerTarjeta();
         return ResponseEntity.ok(obtener);
     }
+    @GetMapping("/buscar/{idUsuario}")
+    public ResponseEntity<TarjetaDTO> obtenerTarjeta(@PathVariable Long idUsuario) {
+        if (idUsuario == null ) {
+            return ResponseEntity.badRequest().build();//400
+        }
+        try {
+            TarjetaDTO tarjetaDTO = tarjetaService.buscarTarjetaDTO(idUsuario);
+            if (tarjetaDTO == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+            return ResponseEntity.ok(tarjetaDTO);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
     @PutMapping("/editar")
     public ResponseEntity<MensajeDTO> editarTarjeta(@RequestBody Tarjeta tarjeta) {
 
-        if (tarjeta.getNumeroTarjeta().isEmpty() || tarjeta.getCodigo().isEmpty() ||
+        if (tarjeta.getIdTarjeta() == null || tarjeta.getNumeroTarjeta() == null || tarjeta.getCodigo() == null ||
                 tarjeta.getFechaExpiracion() == null || tarjeta.getUsuario().getId() == null ||
                 tarjeta.getMedioPago().getIdMedioPago() == null) {
             MensajeDTO errorResponse = new MensajeDTO(
@@ -98,6 +114,7 @@ public class TarjetaController {
         tarjeta1.setCodigo(codigoOculto);
         tarjeta1.setUsuario(usuario);
         tarjeta1.setMedioPago(medioPago);
+        tarjeta1.setIdTarjeta(tarjeta.getIdTarjeta());
 
         tarjetaService.editarTarjeta(tarjeta1);
         MensajeDTO response = new MensajeDTO(

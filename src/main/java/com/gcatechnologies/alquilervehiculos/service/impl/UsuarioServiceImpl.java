@@ -1,6 +1,7 @@
 package com.gcatechnologies.alquilervehiculos.service.impl;
 import com.gcatechnologies.alquilervehiculos.entities.MedioPago;
 import com.gcatechnologies.alquilervehiculos.entities.Usuario;
+import com.gcatechnologies.alquilervehiculos.entities.UsuarioDTO;
 import com.gcatechnologies.alquilervehiculos.repository.MedioPagoRepository;
 import com.gcatechnologies.alquilervehiculos.repository.UsuarioRepository;
 import com.gcatechnologies.alquilervehiculos.service.UsuarioService;
@@ -47,6 +48,17 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public UsuarioDTO buscarUsuarioDTO(Long idUsuario) {
+        Optional<Usuario> usuario = usuarioRepository.findById(idUsuario);
+        if (usuario.isPresent()) {
+            Usuario u = usuario.get();
+            return new UsuarioDTO(u.getNombre(), u.getNombrePila(), u.getApellido(), u.getCedula(), u.getCorreo(), u.getMedioPagos());
+        } else {
+            throw new EntityNotFoundException("Usuario no encontrado.");
+        }
+    }
+
+    @Override
     public Usuario buscarUsuario(Long idUsuario) {
         Optional<Usuario> usuario = usuarioRepository.findById(idUsuario);
         if (usuario.isPresent()){
@@ -55,6 +67,8 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new EntityNotFoundException("Usuario no encontrado.");
         }
     }
+
+
 
 
 }

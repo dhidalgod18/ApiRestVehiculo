@@ -1,8 +1,6 @@
 package com.gcatechnologies.alquilervehiculos.service;
 
-import com.gcatechnologies.alquilervehiculos.entities.Tarjeta;
-import com.gcatechnologies.alquilervehiculos.entities.Usuario;
-import com.gcatechnologies.alquilervehiculos.entities.Vehiculo;
+import com.gcatechnologies.alquilervehiculos.entities.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,5 +13,7 @@ public interface TarjetaService {
     boolean eliminarTarjeta(int idTarjeta);
 
     boolean editarTarjeta(Tarjeta tarjeta);
+
+    TarjetaDTO buscarTarjetaDTO(Long idUsuario);
 
 }

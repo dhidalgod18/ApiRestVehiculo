@@ -1,6 +1,7 @@
 package com.gcatechnologies.alquilervehiculos.controller;
 import com.gcatechnologies.alquilervehiculos.entities.MensajeDTO;
 import com.gcatechnologies.alquilervehiculos.entities.Usuario;
+import com.gcatechnologies.alquilervehiculos.entities.UsuarioDTO;
 import com.gcatechnologies.alquilervehiculos.service.UsuarioService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -27,8 +28,8 @@ public class UsuarioController {
 
     @PostMapping("/nueva")
     public ResponseEntity<MensajeDTO> agregarUsuario(@RequestBody Usuario usuario) {
-        if (usuario.getNombre().isEmpty() || usuario.getNombrePila().isEmpty() || usuario.getApellido().isEmpty()
-                || usuario.getCedula() == null || usuario.getContrasena().isEmpty()){
+        if (usuario.getNombre() == null || usuario.getNombrePila() == null || usuario.getApellido() == null
+                || usuario.getCedula() == null || usuario.getContrasena() == null){
             MensajeDTO errorResponse = new MensajeDTO(
                     "Datos del usuario son inválidos. Por favor, asegúrate de completar todos los campos necesarios.",
                     HttpStatus.BAD_REQUEST
@@ -55,12 +56,12 @@ public class UsuarioController {
     }
 
     @GetMapping("/buscar/{idUsuario}")
-    public ResponseEntity<Usuario> obtenerUsuario(@PathVariable Long idUsuario) {
+    public ResponseEntity<UsuarioDTO> obtenerUsuario(@PathVariable Long idUsuario) {
         if (idUsuario == null ) {
             return ResponseEntity.badRequest().build();//400
         }
         try {
-            Usuario usuario = usuarioService.buscarUsuario(idUsuario);
+            UsuarioDTO usuario = usuarioService.buscarUsuarioDTO(idUsuario);
             if (usuario == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }

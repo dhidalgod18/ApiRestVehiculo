@@ -58,6 +58,9 @@ public class SeguridadPrincipal {
                         .requestMatchers(HttpMethod.POST, "/alquiler/nueva").permitAll()
                         .requestMatchers(HttpMethod.GET, "/alquiler/todos").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/alquiler/cambiarEstado").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/tarjeta/buscar/{idUsuario}").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/tarjeta/editar").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/alquiler/buscar/{idalquiler}").permitAll()
 
 
 

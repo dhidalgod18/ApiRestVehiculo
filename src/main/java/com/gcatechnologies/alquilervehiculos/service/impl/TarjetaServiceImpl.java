@@ -1,6 +1,7 @@
 package com.gcatechnologies.alquilervehiculos.service.impl;
 
 import com.gcatechnologies.alquilervehiculos.entities.Tarjeta;
+import com.gcatechnologies.alquilervehiculos.entities.TarjetaDTO;
 import com.gcatechnologies.alquilervehiculos.entities.Usuario;
 import com.gcatechnologies.alquilervehiculos.entities.Vehiculo;
 import com.gcatechnologies.alquilervehiculos.repository.TarjetaRepository;
@@ -57,6 +58,21 @@ public class TarjetaServiceImpl implements TarjetaService {
 
         }
 
+    }
+
+    @Override
+    public TarjetaDTO buscarTarjetaDTO(Long idUsuario) {
+        Optional<Tarjeta> tarjetaOptional = tarjetaRepository.findByUsuarioId(idUsuario);
+        if (tarjetaOptional.isPresent()) {
+            Tarjeta tarjeta = tarjetaOptional.get();
+            return new TarjetaDTO(
+                    tarjeta.getUsuario().getNombre(),
+                    tarjeta.getMedioPago().getNombre(),
+                    tarjeta.getNumeroTarjeta()
+            );
+        } else {
+            throw new EntityNotFoundException("Tarjeta no encontrada para el usuario con ID: " + idUsuario);
+        }
     }
 
 }

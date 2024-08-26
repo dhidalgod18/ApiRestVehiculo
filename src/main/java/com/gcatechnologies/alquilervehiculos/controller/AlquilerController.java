@@ -111,4 +111,21 @@ public class AlquilerController {
 
     }
 
+    @GetMapping("/buscar/{idalquiler}")
+    public ResponseEntity<AlquilerDTO> obtenerRenta(@PathVariable Long idalquiler) {
+        if (idalquiler == null ) {
+            return ResponseEntity.badRequest().build();//400
+        }
+        try {
+            AlquilerDTO alquilerDTO = alquilarService.buscarAlquilar(idalquiler);
+            if (alquilerDTO == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+            return ResponseEntity.ok(alquilerDTO);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }
